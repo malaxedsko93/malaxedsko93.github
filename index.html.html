@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ethan Segly — Portfolio BTS SIO SISR</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #606266;
+      --panel: #54565a;
+      --panel2: #5b5d61;
+      --line: #7e8084;
+      --accent: #8b1a2f;
+      --soft: #f4e1e5;
+      --text: #fff;
+      --muted: #e3e5e8;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 85px;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      background-image: radial-gradient(#74767a 1px, transparent 1px);
+      background-size: 28px 28px;
+      color: var(--text);
+      font: 16px/1.6 "IBM Plex Sans", sans-serif;
+    }
+
+    h1, h2, h3 {
+      font-family: "Space Grotesk", sans-serif;
+      line-height: 1.2;
+      margin: 0 0 .65em;
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 6vw, 3.6rem);
+    }
+
+    h2 {
+      font-size: clamp(1.5rem, 3vw, 2.1rem);
+    }
+
+    h3 {
+      font-size: 1.1rem;
+    }
+
+    p {
+      max-width: 75ch;
+    }
+
+    a {
+      color: #fff;
+    }
+
+    a:hover {
+      color: var(--soft);
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: #54565aee;
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .bar {
+      max-width: 1100px;
+      margin: auto;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .logo {
+      font: 700 1.05rem "Space Grotesk";
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .logo span {
+      color: var(--soft);
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    nav a {
+      padding: 8px 10px;
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    nav a:hover,
+    nav a.active {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    #burger {
+      display: none;
+      background: transparent;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: white;
+      padding: 7px 10px;
+      font: inherit;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: auto;
+      padding: 36px 20px 60px;
+      min-height: 75vh;
+    }
+
+    .page {
+      display: none;
+      animation: appear .25s ease;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: translateY(5px);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 32px;
+      align-items: center;
+      padding: 24px 0 36px;
+    }
+
+    .eyebrow {
+      color: var(--soft);
+      font-weight: 700;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .card {
+      background: linear-gradient(180deg, var(--panel2), var(--panel));
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 12px 30px -18px #000;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 16px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--accent);
+      border: 1px solid var(--accent);
+      color: white;
+      text-decoration: none;
+      padding: 10px 16px;
+      border-radius: 9px;
+      margin: 5px 6px 5px 0;
+      cursor: pointer;
+      font: 500 .95rem "IBM Plex Sans";
+    }
+
+    .btn.secondary {
+      background: transparent;
+      border-color: var(--soft);
+    }
+
+    .btn:hover {
+      background: #fff;
+      color: var(--accent);
+    }
+
+    .tag {
+      display: inline-block;
+      border: 1px solid var(--line);
+      border-radius: 99px;
+      padding: 3px 10px;
+      margin: 3px;
+      font-size: .82rem;
+      color: var(--muted);
+    }
+
+    .network {
+      width: 100%;
+      max-width: 390px;
+      display: block;
+      margin: auto;
+    }
+
+    .info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+    }
+
+    .info div {
+      padding: 10px 12px;
+      background: #ffffff0a;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+    }
+
+    .info strong {
+      color: var(--soft);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--panel);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    th {
+      background: var(--accent);
+    }
+
+    tbody tr:hover {
+      background: #ffffff0b;
+    }
+
+    .level {
+      white-space: nowrap;
+      font-size: .85rem;
+    }
+
+    .section {
+      margin: 30px 0;
+    }
+
+    .note {
+      padding: 12px 15px;
+      border: 1px dashed #ffd98a;
+      color: #ffe4a8;
+      border-radius: 10px;
+      margin: 18px 0;
+    }
+
+    label {
+      display: block;
+      margin: 12px 0 5px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 11px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: var(--panel);
+      color: white;
+      font: inherit;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      background: var(--panel);
+      text-align: center;
+      padding: 22px;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    @media(max-width: 800px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      #burger {
+        display: block;
+      }
+
+      nav {
+        display: none;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 100%;
+        background: var(--panel);
+        padding: 10px 20px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      nav.open {
+        display: flex;
+        flex-direction: column;
+      }
+
+      nav a {
+        display: block;
+      }
+
+      .bar {
+        flex-wrap: wrap;
+      }
+
+      table {
+        font-size: .9rem;
+      }
+
+      th, td {
+        padding: 9px 8px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="bar">
+    <a class="logo" href="#accueil">
+      ▸ Ethan <span>SEGLY</span> · BTS SIO SISR
+    </a>
+
+    <button id="burger" aria-expanded="false">Menu ☰</button>
+
+    <nav id="nav" aria-label="Navigation principale">
+      <a href="#accueil" class="active">Accueil</a>
+      <a href="#competences">Compétences</a>
+      <a href="#e5">Épreuve E5</a>
+      <a href="#e6">Épreuve E6</a>
+      <a href="#entreprise">Entreprise</a>
+      <a href="#veille">Veille</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- ACCUEIL -->
+  <section class="page active" id="accueil">
+
+    <div class="hero">
+      <div>
+        <p class="eyebrow">
+          Étudiant en BTS SIO option SISR · Technicien réseau et téléphonie
+        </p>
+
+        <h1>Ethan Segly</h1>
+
+        <p>
+          Étudiant en BTS Services Informatiques aux Organisations,
+          spécialité Solutions d'Infrastructure, Systèmes et Réseaux (SISR).
+          Je travaille dans un environnement professionnel à la Préfecture
+          de Paris, où je développe mes compétences en réseau, téléphonie,
+          assistance et diagnostic. Je souhaite continuer à progresser dans
+          l'administration des systèmes et des réseaux.
+        </p>
+
+        <a class="btn" href="#competences">Voir mes compétences</a>
+
+        <a class="btn secondary" href="CV.pdf" download>
+          Télécharger mon CV
+        </a>
+      </div>
+
+      <div class="card">
+        <svg class="network" viewBox="0 0 400 300"
+             role="img" aria-label="Illustration d'un réseau informatique">
+
+          <g stroke="#a0a2a6" stroke-width="2">
+            <path d="M200 150L70 60M200 150L330 60M200 150L60 230M200 150L340 230"/>
+          </g>
+
+          <g fill="#54565a" stroke="#fff" stroke-width="2">
+            <rect x="165" y="125" width="70" height="50" rx="8"/>
+            <circle cx="70" cy="60" r="22"/>
+            <circle cx="330" cy="60" r="22"/>
+            <circle cx="60" cy="230" r="22"/>
+            <circle cx="340" cy="230" r="22"/>
+          </g>
+
+          <g fill="#fff" font-size="12" text-anchor="middle">
+            <text x="200" y="154">Switch</text>
+            <text x="70" y="64">PC</text>
+            <text x="330" y="64">IP</text>
+            <text x="60" y="234">NAS</text>
+            <text x="340" y="234">Serveur</text>
+          </g>
+
+        </svg>
+      </div>
+    </div>
+
+    <section class="section">
+      <h2>En quelques mots</h2>
+
+      <div class="info">
+        <div>
+          <strong>Formation :</strong><br>
+          BTS SIO — option SISR
+        </div>
+
+        <div>
+          <strong>Environnement :</strong><br>
+          Réseaux et téléphonie professionnelle
+        </div>
+
+        <div>
+          <strong>Domaines :</strong><br>
+          Réseaux, systèmes, support et sécurité
+        </div>
+      </div>
+    </section>
+
+  </section>
+
+
+  <!-- COMPÉTENCES -->
+  <section class="page" id="competences">
+
+    <h1>Tableau de compétences</h1>
+
+    <p class="muted">
+      Ce tableau présente les compétences techniques travaillées en
+      formation et en environnement professionnel. Les niveaux sont à
+      ajuster selon ton expérience réelle.
+    </p>
+
+    <!-- LIEN VERS LE TABLEAU PDF -->
+    <div class="section card">
+
+      <h2>Mon tableau de compétences officiel</h2>
+
+      <p>
+        Consulte mon tableau de compétences au format PDF pour retrouver
+        les compétences détaillées et leur suivi.
+      </p>
+
+      <a
+        class="btn"
+        href="tableau-competences.pdf"
+        target="_blank"
+        rel="noopener"
+      >
+        Afficher mon tableau de compétences (PDF) ↗
+      </a>
+
+      <p class="muted">
+        Le PDF s'ouvrira dans un nouvel onglet.
+      </p>
+
+    </div>
+
+    <!-- TABLEAU HTML -->
+    <div class="section">
+
+      <h2>Compétences techniques</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Domaine</th>
+            <th>Compétence</th>
+            <th>Niveau</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>Réseaux</td>
+            <td>Adressage IPv4 et sous-réseaux</td>
+            <td><span class="tag">Acquis</span></td>
+          </tr>
+
+          <tr>
+            <td>Réseaux</td>
+            <td>VLSM et plan d'adressage</td>
+            <td><span class="tag">En cours</span></td>
+          </tr>
+
+          <tr>
+            <td>Réseaux</td>
+            <td>VLAN, routage et commutation</td>
+            <td><span class="tag">Acquis</span></td>
+          </tr>
+
+          <tr>
+            <td>Réseaux</td>
+            <td>DHCP et DNS</td>
+            <td><span class="tag">Acquis</span></td>
+          </tr>
+
+          <tr>
+            <td>Réseaux</td>
+            <td>Analyse de trames avec Wireshark</td>
+            <td><span class="tag">En cours</span></td>
+          </tr>
+
+          <tr>
+            <td>Systèmes</td>
+            <td>Windows et Linux</td>
+            <td><span class="tag">À préciser</span></td>
+          </tr>
+
+          <tr>
+            <td>Systèmes</td>
+            <td>Gestion des utilisateurs et des droits</td>
+            <td><span class="tag">Acquis</span></td>
+          </tr>
+
+          <tr>
+            <td>Systèmes</td>
+            <td>Maintenance des postes et serveurs</td>
+            <td><span class="tag">Acquis</span></td>
+          </tr>
+
+          <tr>
+            <td>Téléphonie</td>
+            <td>Assistance et dépannage téléphonique</td>
+            <td><span class="tag">Acquis</span></td>
+          </tr>
+
+          <tr>
+            <td>Téléphonie</td>
+            <td>Diagnostic d'incidents et suivi des équipements</td>
+            <td><span class="tag">En cours</span></td>
+          </tr>
+
+          <tr>
+            <td>Cybersécurité</td>
+            <td>Gestion des accès et bonnes pratiques</td>
+            <td><span class="tag">À développer</span></td>
+          </tr>
+
+          <tr>
+            <td>Support</td>
+            <td>Assistance aux utilisateurs et suivi des demandes</td>
+            <td><span class="tag">Acquis</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+    <div class="section">
+      <h2>Outils informatiques</h2>
+
+      <p>
+        <span class="tag">Wireshark</span>
+        <span class="tag">Packet Tracer</span>
+        <span class="tag">Windows Server</span>
+        <span class="tag">Linux</span>
+        <span class="tag">VirtualBox</span>
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>Référentiel BTS SIO</h2>
+
+      <div class="grid">
+
+        <article class="card">
+          <h3>Gérer le patrimoine informatique</h3>
+          <p class="muted">
+            Inventorier, maintenir et documenter les ressources informatiques.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Répondre aux incidents</h3>
+          <p class="muted">
+            Analyser les demandes, diagnostiquer et résoudre les incidents.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Mettre à disposition un service</h3>
+          <p class="muted">
+            Assurer le fonctionnement et la disponibilité des services informatiques.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Organiser son développement professionnel</h3>
+          <p class="muted">
+            Développer ses compétences et effectuer une veille technologique.
+          </p>
+        </article>
+
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- ÉPREUVE E5 -->
+  <section class="page" id="e5">
+
+    <h1>Épreuve E5 — Réalisations professionnelles</h1>
+
+    <p class="muted">
+      Projets réalisés en formation ou en entreprise.
+      Les exemples ci-dessous sont des réalisations réelles.
+    </p>
+
+    <div class="grid section">
+
+      <article class="card">
+        <h3>Diagnostic d'un problème réseau</h3>
+        <p><strong>Objectif :</strong> identifier l'origine d'une perte de connectivité.</p>
+        <p><strong>Étapes :</strong> vérifier les connexions, contrôler l'adressage IP, tester la passerelle et le DNS.</p>
+        <p><strong>Outils :</strong> ping, ipconfig, traceroute.</p>
+      </article>
+
+      <article class="card">
+        <h3>Analyse d'une trame avec Wireshark</h3>
+        <p><strong>Objectif :</strong> identifier les protocoles et comprendre les échanges réseau.</p>
+        <p><strong>Étapes :</strong> réaliser une capture, appliquer un filtre, analyser les champs de la trame.</p>
+        <p><strong>Outil :</strong> Wireshark.</p>
+      </article>
+
+      <article class="card">
+        <h3>Plan d'adressage avec VLSM</h3>
+        <p><strong>Objectif :</strong> répartir les adresses IP selon les besoins des sous-réseaux.</p>
+        <p><strong>Étapes :</strong> recenser les besoins, calculer les masques, attribuer les plages d'adresses.</p>
+        <p><strong>Outils :</strong> tableur, Packet Tracer.</p>
+      </article>
+
+    </div>
+
+    <div class="note">
+      Pense à ajouter pour chaque réalisation la date, le contexte,
+      les captures d'écran anonymisées, les difficultés rencontrées
+      et le résultat obtenu. Ne publie aucune information confidentielle
+      de l'entreprise.
+    </div>
+
+  </section>
+
+
+  <!-- ÉPREUVE E6 -->
+  <section class="page" id="e6">
+
+    <h1>Épreuve E6 — Parcours de professionnalisation</h1>
+
+    <div class="grid section">
+
+      <article class="card">
+        <h3>Mon parcours</h3>
+        <p><strong>2023–2024 :</strong> Baccalauréat général — SES et HGGSP, lycée Marcelin-Berthelot.</p>
+        <p><strong>2026–en cours :</strong> BTS SIO option SISR — Ynov Campus.</p>
+        <p><strong>2024–en cours :</strong> Technicien réseau et téléphonie — Préfecture de Paris.</p>
+      </article>
+
+      <article class="card">
+        <h3>Compétences développées</h3>
+        <p>
+          Rigueur, organisation, autonomie, curiosité, esprit d'équipe
+          et résolution de problèmes.
+        </p>
+        <p>
+          Les missions réalisées m'aident à appliquer les notions vues
+          en cours et à respecter les procédures d'un environnement professionnel.
+        </p>
+      </article>
+
+    </div>
+
+    <div class="section">
+      <h2>Exemples de preuves à présenter</h2>
+
+      <ul>
+        <li>Fiches de réalisations professionnelles.</li>
+        <li>Captures d'écran ou schémas réseau anonymisés.</li>
+        <li>Procédures de diagnostic ou de dépannage.</li>
+        <li>Documents de suivi d'intervention sans données confidentielles.</li>
+      </ul>
+    </div>
+
+  </section>
+
+
+  <!-- ENTREPRISE -->
+  <section class="page" id="entreprise">
+
+    <h1>Mon environnement professionnel</h1>
+
+    <div class="card section">
+      <h2>Préfecture de Paris</h2>
+
+      <p>
+        J'évolue dans un environnement professionnel lié au réseau et à
+        la téléphonie. Cette expérience me permet de développer ma méthode
+        de diagnostic, mon sens du service et le respect des procédures.
+      </p>
+
+      <p>
+        Les informations internes, les noms d'utilisateurs, les adresses IP
+        privées et les détails sensibles ne sont pas publiés dans ce portfolio
+        pour préserver la confidentialité.
+      </p>
+    </div>
+
+    <div class="grid">
+
+      <article class="card">
+        <h3>Réseaux</h3>
+        <p>Participation au suivi et au diagnostic des problèmes de connectivité.</p>
+      </article>
+
+      <article class="card">
+        <h3>Téléphonie</h3>
+        <p>Assistance et suivi des équipements de téléphonie professionnelle.</p>
+      </article>
+
+      <article class="card">
+        <h3>Support</h3>
+        <p>Prise en compte des demandes et accompagnement des utilisateurs.</p>
+      </article>
+
+    </div>
+
+    <p class="note">
+      Adapte ces descriptions à tes missions réellement effectuées
+      et validées par ton entreprise.
+    </p>
+
+  </section>
+
+
+  <!-- VEILLE TECHNOLOGIQUE -->
+  <section class="page" id="veille">
+
+    <h1>Veille technologique</h1>
+
+    <p class="muted">
+      Ma veille porte sur les évolutions des réseaux, de la téléphonie IP,
+      de la cybersécurité et des systèmes.
+    </p>
+
+    <div class="grid section">
+
+      <article class="card">
+        <h3>Cybersécurité</h3>
+        <p>
+          Suivre les vulnérabilités, les alertes de sécurité et les
+          recommandations pour protéger les systèmes d'information.
+        </p>
+        <a href="https://www.cert.ssi.gouv.fr/" target="_blank" rel="noopener">
+          Consulter le CERT-FR
+        </a>
+      </article>
+
+      <article class="card">
+        <h3>Réseaux et infrastructures</h3>
+        <p>
+          Suivre les bonnes pratiques de sécurisation et d'administration
+          des infrastructures réseau.
+        </p>
+        <a href="https://cyber.gouv.fr/" target="_blank" rel="noopener">
+          Consulter l'ANSSI
+        </a>
+      </article>
+
+      <article class="card">
+        <h3>Données et vie privée</h3>
+        <p>
+          Comprendre les enjeux de protection des données et les recommandations associées.
+        </p>
+        <a href="https://www.cnil.fr/" target="_blank" rel="noopener">
+          Consulter la CNIL
+        </a>
+      </article>
+
+    </div>
+
+    <div class="card">
+      <h2>Ma méthode</h2>
+
+      <p>
+        Je consulte des sources spécialisées, je vérifie l'information à
+        partir de la source officielle, puis je résume les points importants
+        et leur intérêt pour le métier de technicien réseau et systèmes.
+      </p>
+    </div>
+
+  </section>
+
+
+  <!-- CONTACT -->
+  <section class="page" id="contact">
+
+    <h1>Contact</h1>
+
+    <div class="grid section">
+
+      <div class="card">
+        <h2>Me contacter</h2>
+
+        <p>
+          Pour échanger au sujet de mon parcours, de mes réalisations ou
+          d'une opportunité professionnelle, vous pouvez compléter le formulaire.
+        </p>
+
+        <p class="muted">
+        </p>
+
+        <p><strong>E-mail :</strong> Ethvn.sgl@mail.com</p>
+        <p><strong>LinkedIn :</strong> à renseigner</p>
+
+        <p>
+          <a class="btn secondary" href="CV.pdf" download>
+            Télécharger mon CV
+          </a>
+        </p>
+      </div>
+
+      <form class="card" id="contact-form">
+
+        <label for="nom">Nom</label>
+        <input id="nom" required placeholder="Votre nom">
+
+        <label for="email">Adresse e-mail</label>
+        <input id="email" type="email" required placeholder="Votre e-mail">
+
+        <label for="objet">Objet</label>
+        <input id="objet" required placeholder="Objet du message">
+
+        <label for="message">Message</label>
+        <textarea id="message" rows="5" required placeholder="Votre message"></textarea>
+
+        <button class="btn" type="submit">Préparer le message</button>
+
+        <p id="form-status" class="muted" aria-live="polite"></p>
+
+      </form>
+
+    </div>
+
+  </section>
+
+</main>
+
+<footer>
+  © <span id="year"></span> Ethan Segly — Portfolio BTS SIO SISR
+</footer>
+
+<script>
+  // Gestion des pages du portfolio
+  const pages = [...document.querySelectorAll('.page')];
+  const links = [...document.querySelectorAll('nav a')];
+
+  function showPage() {
+    const id = (location.hash || '#accueil').slice(1);
+
+    const target =
+      document.getElementById(id) &&
+      document.getElementById(id).classList.contains('page')
+        ? id
+        : 'accueil';
+
+    pages.forEach(page => {
+      page.classList.toggle('active', page.id === target);
+    });
+
+    links.forEach(link => {
+      link.classList.toggle(
+        'active',
+        link.getAttribute('href') === '#' + target
+      );
+    });
+
+    document.getElementById('nav').classList.remove('open');
+
+    document.getElementById('burger').setAttribute(
+      'aria-expanded',
+      'false'
+    );
+
+    window.scrollTo(0, 0);
+  }
+
+  window.addEventListener('hashchange', showPage);
+  showPage();
+
+
+  // Menu mobile
+  const burger = document.getElementById('burger');
+
+  burger.addEventListener('click', () => {
+    const nav = document.getElementById('nav');
+    const open = nav.classList.toggle('open');
+
+    burger.setAttribute('aria-expanded', String(open));
+  });
+
+
+  // Année automatique dans le pied de page
+  document.getElementById('year').textContent =
+    new Date().getFullYear();
+
+
+  // Formulaire de contact
+  document.getElementById('contact-form').addEventListener('submit', e => {
+    e.preventDefault();
+
+    const value = id =>
+      document.getElementById(id).value.trim();
+
+    const subject = encodeURIComponent(value('objet'));
+
+    const body = encodeURIComponent(
+      value('message') + '\n\n' +
+      value('nom') + ' — ' +
+      value('email')
+    );
+
+    document.getElementById('form-status').textContent =
+      'Remplace l’adresse e-mail de destination dans le code pour activer l’ouverture de ta messagerie.';
+  });
+</script>
+
+</body>
+</html>
